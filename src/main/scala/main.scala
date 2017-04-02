@@ -1,4 +1,4 @@
-package hrj.leaves
+package hrj.tflif
 
 import org.rogach.scallop._
 
@@ -16,11 +16,11 @@ class Conf(arguments: Seq[String], isServer: Boolean) extends ScallopConf(argume
   val verbose = opt[Boolean]()
 
   version("0.1")
-  banner("leaves")
+  banner("tflif")
   verify()
 }
 
-object LeavesApp extends App {
+object TFLIFApp extends App {
   override def main(args: Array[String]) {
     val (serverArgs, nonServerArgs) = args.partition(_ == "-s")
     val isServer = !serverArgs.isEmpty

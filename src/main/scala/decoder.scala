@@ -1,4 +1,4 @@
-package hrj.leaves
+package hrj.tflif
 
 import scala.sys.process._
 import java.awt.Rectangle
