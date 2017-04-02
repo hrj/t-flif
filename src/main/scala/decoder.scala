@@ -5,8 +5,8 @@ import java.awt.Rectangle
 
 case class TileOptions(name: String, width: Int, height: Int)
 case class DecodeOptions(top: Int, bottom:Int, left: Int, right: Int, downsample: Int) {
-  def width = right - left + 1
-  def height = bottom - top + 1
+  def width = (right - left + 1) / downsample
+  def height = (bottom - top + 1) / downsample
 }
 
 case class DecodeResult()
@@ -28,22 +28,22 @@ object Decoder {
     var dy = 0
 
     def mkSrcRect(r:Int, c:Int) = {
-      val srcX = if (c == leftTile) (decodeOpts.left % tileOpts.width) else 0
-      val srcY = if (r == topTile) (decodeOpts.top % tileOpts.height) else 0
-      val srcWidth = (if (c == rightTile) ((decodeOpts.right % tileOpts.width) + 1) else tileOpts.width) - srcX
-      val srcHeight = (if (r == bottomTile) ((decodeOpts.bottom % tileOpts.height) + 1) else tileOpts.height) - srcY 
+      val srcX = if (c == leftTile) ((decodeOpts.left % tileOpts.width)/decodeOpts.downsample) else 0
+      val srcY = if (r == topTile) ((decodeOpts.top % tileOpts.height)/decodeOpts.downsample) else 0
+      val srcWidth = ((if (c == rightTile) ((decodeOpts.right % tileOpts.width) + 1) else tileOpts.width)/ decodeOpts.downsample) - srcX
+      val srcHeight = ((if (r == bottomTile) ((decodeOpts.bottom % tileOpts.height) + 1) else tileOpts.height) / decodeOpts.downsample) - srcY
       val srcRect = new Rectangle(srcX, srcY, srcWidth, srcHeight)
       srcRect
     }
 
     def readPng(pngFileName: String, r: Int, c: Int) = {
       val srcRect = mkSrcRect(r, c)
+      // println("src rect: " + srcRect)
 
       val img = javax.imageio.ImageIO.read(new java.io.File(pngFileName))
 
       val raster = img.getData
       val data:Array[Int] = raster.getPixels(srcRect.x, srcRect.y, srcRect.width, srcRect.height, null)
-      // println("src rect: " + srcRect)
       resultRaster.setPixels(dx, dy, srcRect.width, srcRect.height, data)
       dx += srcRect.width
       if (c == rightTile) {

@@ -9,4 +9,4 @@ convert ${IMG} -crop ${TILEX}x${TILEY} \
           -set filename:tile "%[fx:page.y/${TILEY}+1]-%[fx:page.x/${TILEX}+1]" \
           +repage +adjoin "${NAME}-%[filename:tile].png"
 
-parallel flif {} {.}.flif ::: ${NAME}-*.png
+parallel flif -I {} {.}.flif ::: ${NAME}-*.png
