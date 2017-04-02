@@ -12,7 +12,13 @@ case class DecodeOptions(top: Int, bottom:Int, left: Int, right: Int, downsample
 case class DecodeResult()
 
 object Decoder {
+  private def mkOutDir() {
+    new java.io.File("tmpOut").mkdirs()
+  }
+
   def decode(tileOpts: TileOptions, decodeOpts: DecodeOptions) : DecodeResult = {
+    mkOutDir()
+
     val topTile = (decodeOpts.top / tileOpts.height) + 1
     val bottomTile = (decodeOpts.bottom / tileOpts.height) + 1
 
@@ -68,7 +74,7 @@ object Decoder {
 
   private def flifDecode(tileOpts: TileOptions, decodeOpts: DecodeOptions, r: Int, c: Int) = {
     val fileName = s"${tileOpts.name}-$r-$c.flif"
-    val outFileName = s"out-$r-$c.png"
+    val outFileName = s"tmpOut/out-$r-$c.png"
     // TODO: Avoid overwrite
     val command = s"flif --overwrite -s ${decodeOpts.downsample} -d $fileName $outFileName"
     // println(command)
