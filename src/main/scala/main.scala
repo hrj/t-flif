@@ -16,7 +16,7 @@ class Conf(arguments: Seq[String], isServer: Boolean) extends ScallopConf(argume
   val verbose = opt[Boolean]()
 
   version("0.1")
-  banner("tflif")
+  banner("t-flif")
   verify()
 }
 
