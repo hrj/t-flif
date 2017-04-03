@@ -49,6 +49,9 @@ object Decoder {
       val img = javax.imageio.ImageIO.read(new java.io.File(pngFileName))
 
       val raster = img.getData
+      assert(raster.getWidth == tileOpts.width / decodeOpts.downsample)
+      assert(raster.getHeight == tileOpts.height / decodeOpts.downsample)
+
       val data:Array[Int] = raster.getPixels(srcRect.x, srcRect.y, srcRect.width, srcRect.height, null)
       resultRaster.setPixels(dx, dy, srcRect.width, srcRect.height, data)
       dx += srcRect.width
