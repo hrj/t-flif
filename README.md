@@ -24,9 +24,9 @@ of the implementation details will change later.
 ## Roadmap
 
 ### Immediate
-* Various simple optimisations, such as caching the decoded output, parallel decoding
-* Support for different types of images (grey-scale, RGB, RGBA, 16-bit, etc)
-* An `http` server
+* Various simple optimisations, such as [caching the decoded output](https://github.com/hrj/t-flif/issues/1), [parallel decoding](https://github.com/hrj/t-flif/issues/2)
+* [Support for different types of images](https://github.com/hrj/t-flif/issues/3) (grey-scale, RGB, RGBA, 16-bit, etc)
+* [An `http` server](https://github.com/hrj/t-flif/issues/4) with [zoomable, pannable demo](https://github.com/hrj/t-flif/issues/5)
 
 ### Long term
 * More complex optimisations, such as embedding the decoder, using a low-level language, etc
