@@ -37,6 +37,7 @@ of the implementation details will change later.
 * Re-encode output as FLIF
 
 ### Long term
+* Javascript version of t-flif using ScalaJS and PolyFLIF.
 * More complex optimisations, such as embedding the decoder, using a low-level language, etc
 * Support for more image formats
 * Fast re-encoding of output in FLIF format
