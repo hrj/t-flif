@@ -3,11 +3,13 @@
 Support for tiled FLIF images. With the help of `t-flif`, a large image can be stored as a 2D matrix of tiles and a sub-image
 can be decoded on the fly.
 
+## Advantages
 Why use tiles? The FLIF format (as of writing) interweaves pixel and bit data from all over the image. Hence it is not possible
-to decode a sub-image of a FLIF file. Nor is it possible to parallelise the decoding. This is a bottle-neck for large images.
+to decode only a sub-region of a FLIF image. Nor is it possible to parallelise the decoding of a single FLIF file.
 
 By splitting the image into smaller tiles, only the required subset of data can be decoded and it can be decoded in parallel, utilising
-all the processing cores available in the CPU.
+all the processing cores available in the CPU. Moreover, sub-regions of the image can be updated by re-encoding and updating only the
+relevant tiles.
 
 ## Status
 This is a very early, but useable, prototype. It is a peg in the ground to collect more feedback and
